@@ -1,4 +1,4 @@
-// src/screens/MemoriaScreen.jsx
+// src/screens/MemoriaScreen.jsx - BONITO E CENTRALIZADO
 
 import React, { useState, useEffect } from 'react';
 import { COLORS, SIZES } from '../styles/colors';
@@ -95,6 +95,7 @@ export default function MemoriaScreen({ onVoltar }) {
     setJogadas(0);
   };
 
+  // MENU DE SELEÇÃO DE NÍVEL
   if (!nivel) {
     return (
       <div style={styles.container}>
@@ -138,15 +139,16 @@ export default function MemoriaScreen({ onVoltar }) {
             }}
             onClick={onVoltar}
           >
-            ⬅️ VOLTAR AO INÍCIO
+            <span style={styles.iconeNivel}>⬅️</span>
+            <span style={styles.textoNivel}>VOLTAR AO INÍCIO</span>
           </button>
         </main>
       </div>
     );
   }
 
-  // AJUSTADO: Cartas menores para caber mais na tela
-  const gridColumns = nivel === 'facil' ? 2 : nivel === 'medio' ? 3 : 4;
+  // JOGO ATIVO
+  const colunas = nivel === 'facil' ? 2 : nivel === 'medio' ? 3 : 4;
 
   return (
     <div style={styles.container}>
@@ -157,62 +159,79 @@ export default function MemoriaScreen({ onVoltar }) {
         </p>
       </header>
 
+      {/* ✅ ÁREA PRINCIPAL COM CENTRALIZAÇÃO VERTICAL E HORIZONTAL */}
       <main style={styles.mainJogo}>
-        <div
-          style={{
-            ...styles.gridCartas,
-            gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
-          }}
-        >
-          {cartas.map((carta) => {
-            const estaVirada =
-              cartasViradas.includes(carta.id) ||
-              cartasEncontradas.includes(carta.id);
+        <div style={styles.containerCentralizado}>
+          {/* GRID DE CARTAS */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: `repeat(${colunas}, 1fr)`,
+              gap: '12px',
+              width: '100%',
+              maxWidth: nivel === 'facil' ? '260px' : nivel === 'medio' ? '380px' : '480px',
+              margin: '0 auto',
+            }}
+          >
+            {cartas.map((carta) => {
+              const estaVirada =
+                cartasViradas.includes(carta.id) ||
+                cartasEncontradas.includes(carta.id);
 
-            return (
-              <button
-                key={carta.id}
-                style={{
-                  ...styles.carta,
-                  backgroundColor: estaVirada ? COLORS.success : COLORS.primary,
-                  cursor: estaVirada || bloqueado ? 'default' : 'pointer',
-                  opacity: estaVirada || bloqueado ? 0.9 : 1, // MAIS VISÍVEL
-                }}
-                onClick={() => virarCarta(carta.id)}
-                disabled={estaVirada || bloqueado}
-              >
-                <span style={styles.emojiCarta}>
+              return (
+                <button
+                  key={carta.id}
+                  style={{
+                    aspectRatio: '1',
+                    minHeight: '80px',
+                    maxHeight: '110px',
+                    borderRadius: SIZES.borderRadius,
+                    border: `${SIZES.borderWidth}px solid ${COLORS.border}`,
+                    backgroundColor: estaVirada ? COLORS.success : COLORS.primary,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 'clamp(32px, 5vw, 48px)',
+                    cursor: estaVirada || bloqueado ? 'default' : 'pointer',
+                    boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                    transition: 'all 0.3s',
+                    opacity: estaVirada ? 0.95 : 1,
+                  }}
+                  onClick={() => virarCarta(carta.id)}
+                  disabled={estaVirada || bloqueado}
+                >
                   {estaVirada ? carta.emoji : '❓'}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+                </button>
+              );
+            })}
+          </div>
 
-        <div style={styles.botoesControle}>
-          <button style={styles.botaoControle} onClick={reiniciarJogo}>
-            🔄 REINICIAR
-          </button>
+          {/* BOTÕES DE CONTROLE */}
+          <div style={styles.botoesControle}>
+            <button style={styles.botaoControle} onClick={reiniciarJogo}>
+              🔄 REINICIAR
+            </button>
 
-          <button
-            style={{
-              ...styles.botaoControle,
-              backgroundColor: COLORS.warning,
-            }}
-            onClick={voltarSelecao}
-          >
-            📋 MUDAR NÍVEL
-          </button>
+            <button
+              style={{
+                ...styles.botaoControle,
+                backgroundColor: COLORS.warning,
+              }}
+              onClick={voltarSelecao}
+            >
+              📋 MUDAR NÍVEL
+            </button>
 
-          <button
-            style={{
-              ...styles.botaoControle,
-              backgroundColor: COLORS.textSecondary,
-            }}
-            onClick={onVoltar}
-          >
-            ⬅️ VOLTAR
-          </button>
+            <button
+              style={{
+                ...styles.botaoControle,
+                backgroundColor: COLORS.textSecondary,
+              }}
+              onClick={onVoltar}
+            >
+              ⬅️ VOLTAR
+            </button>
+          </div>
         </div>
       </main>
     </div>
@@ -232,6 +251,7 @@ const styles = {
     padding: SIZES.spacing.large,
     borderBottom: `${SIZES.borderWidth}px solid ${COLORS.border}`,
     textAlign: 'center',
+    flexShrink: 0,
   },
 
   titulo: {
@@ -257,16 +277,29 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     gap: SIZES.spacing.large,
+    overflowY: 'auto',
   },
 
+  // ✅ NOVO: Área do jogo com centralização perfeita
   mainJogo: {
     flex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: SIZES.spacing.medium,
     overflowY: 'auto',
+  },
+
+  // ✅ NOVO: Container que centraliza tudo verticalmente e horizontalmente
+  containerCentralizado: {
     display: 'flex',
     flexDirection: 'column',
-    gap: SIZES.spacing.medium,
     alignItems: 'center',
+    justifyContent: 'center',
+    gap: SIZES.spacing.large,
+    width: '100%',
+    maxWidth: '600px',
+    padding: SIZES.spacing.medium,
   },
 
   botaoNivel: {
@@ -301,45 +334,19 @@ const styles = {
     color: COLORS.textLight,
   },
 
-  gridCartas: {
-    display: 'grid',
-    gap: '8px', // REDUZIDO de 10px para 8px
-    padding: SIZES.spacing.small,
-    maxWidth: '500px', // REDUZIDO de 600px
-    width: '100%',
-  },
-
-  carta: {
-    aspectRatio: '1',
-    minHeight: '70px', // REDUZIDO de 80px para 70px
-    maxHeight: '100px', // LIMITE MÁXIMO
-    borderRadius: SIZES.borderRadius,
-    border: `${SIZES.borderWidth}px solid ${COLORS.border}`,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
-    transition: 'all 0.3s',
-  },
-
-  emojiCarta: {
-    fontSize: 'clamp(25px, 4vw, 40px)', // REDUZIDO tamanho máximo
-  },
-
   botoesControle: {
     display: 'flex',
     gap: SIZES.spacing.small,
     flexWrap: 'wrap',
     justifyContent: 'center',
-    padding: SIZES.spacing.small,
     width: '100%',
-    maxWidth: '500px',
+    marginTop: SIZES.spacing.medium,
   },
 
   botaoControle: {
     flex: 1,
-    minWidth: '100px', // REDUZIDO de 120px
-    minHeight: '55px', // REDUZIDO de 60px
+    minWidth: '115px',
+    minHeight: '60px',
     padding: SIZES.spacing.small,
     borderRadius: SIZES.borderRadius,
     border: `${SIZES.borderWidth}px solid ${COLORS.border}`,
@@ -350,5 +357,6 @@ const styles = {
     cursor: 'pointer',
     textTransform: 'uppercase',
     boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+    transition: 'all 0.2s',
   },
 };

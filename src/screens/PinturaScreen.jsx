@@ -1,4 +1,4 @@
-// src/screens/PinturaScreen.jsx
+// src/screens/PinturaScreen.jsx - VERSÃO CORRIGIDA
 
 import React, { useRef, useEffect, useState } from 'react';
 import { COLORS, SIZES } from '../styles/colors';
@@ -9,7 +9,7 @@ export default function PinturaScreen({ onVoltar }) {
   const [corSelecionada, setCorSelecionada] = useState(COLORS.paint.preto);
   const [espessura, setEspessura] = useState(5);
   const [desenhando, setDesenhando] = useState(false);
-  const [modo, setModo] = useState('menu'); // 'menu', 'livre', 'colorir'
+  const [modo, setModo] = useState('menu');
   const [desenhoEscolhido, setDesenhoEscolhido] = useState(null);
 
   const cores = [
@@ -142,7 +142,8 @@ export default function PinturaScreen({ onVoltar }) {
             }}
             onClick={onVoltar}
           >
-            ⬅️ VOLTAR AO INÍCIO
+            <span style={styles.iconeModo}>⬅️</span>
+            <span style={styles.textoModo}>VOLTAR AO INÍCIO</span>
           </button>
         </main>
       </div>
@@ -175,14 +176,16 @@ export default function PinturaScreen({ onVoltar }) {
             <span style={styles.textoModo}>CASA</span>
           </button>
 
+          {/* ✅ TROCADO: Sol → Coração */}
           <button
             style={{ ...styles.botaoModo, backgroundColor: COLORS.secondary }}
-            onClick={() => setDesenhoEscolhido('sol')}
+            onClick={() => setDesenhoEscolhido('coracao')}
           >
-            <span style={styles.iconeModo}>☀️</span>
-            <span style={styles.textoModo}>SOL</span>
+            <span style={styles.iconeModo}>💖</span>
+            <span style={styles.textoModo}>CORAÇÃO</span>
           </button>
 
+          {/* ✅ BOTÃO VOLTAR PADRONIZADO */}
           <button
             style={{
               ...styles.botaoModo,
@@ -190,7 +193,8 @@ export default function PinturaScreen({ onVoltar }) {
             }}
             onClick={() => setModo('menu')}
           >
-            ⬅️ VOLTAR
+            <span style={styles.iconeModo}>⬅️</span>
+            <span style={styles.textoModo}>VOLTAR</span>
           </button>
         </main>
       </div>
