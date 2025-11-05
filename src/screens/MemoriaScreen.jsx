@@ -1,4 +1,4 @@
-// src/screens/MemoriaScreen.jsx - BONITO E CENTRALIZADO
+// src/screens/MemoriaScreen.jsx - VERSÃO COMPLETA COM EMOJIS MAIORES
 
 import React, { useState, useEffect } from 'react';
 import { COLORS, SIZES } from '../styles/colors';
@@ -159,10 +159,9 @@ export default function MemoriaScreen({ onVoltar }) {
         </p>
       </header>
 
-      {/* ✅ ÁREA PRINCIPAL COM CENTRALIZAÇÃO VERTICAL E HORIZONTAL */}
       <main style={styles.mainJogo}>
         <div style={styles.containerCentralizado}>
-          {/* GRID DE CARTAS */}
+          {/* GRID DE CARTAS COM EMOJIS MAIORES E MAIS VISÍVEIS */}
           <div
             style={{
               display: 'grid',
@@ -187,20 +186,23 @@ export default function MemoriaScreen({ onVoltar }) {
                     maxHeight: '110px',
                     borderRadius: SIZES.borderRadius,
                     border: `${SIZES.borderWidth}px solid ${COLORS.border}`,
-                    backgroundColor: estaVirada ? COLORS.success : COLORS.primary,
+                    backgroundColor: estaVirada ? '#4CAF50' : COLORS.primary,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: 'clamp(32px, 5vw, 48px)',
+                    fontSize: 'clamp(35px, 6vw, 52px)',
                     cursor: estaVirada || bloqueado ? 'default' : 'pointer',
                     boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
                     transition: 'all 0.3s',
-                    opacity: estaVirada ? 0.95 : 1,
+                    opacity: 1,
+                    filter: 'none',
                   }}
                   onClick={() => virarCarta(carta.id)}
                   disabled={estaVirada || bloqueado}
                 >
-                  {estaVirada ? carta.emoji : '❓'}
+                  <span style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>
+                    {estaVirada ? carta.emoji : '❓'}
+                  </span>
                 </button>
               );
             })}
@@ -280,7 +282,6 @@ const styles = {
     overflowY: 'auto',
   },
 
-  // ✅ NOVO: Área do jogo com centralização perfeita
   mainJogo: {
     flex: 1,
     display: 'flex',
@@ -290,7 +291,6 @@ const styles = {
     overflowY: 'auto',
   },
 
-  // ✅ NOVO: Container que centraliza tudo verticalmente e horizontalmente
   containerCentralizado: {
     display: 'flex',
     flexDirection: 'column',

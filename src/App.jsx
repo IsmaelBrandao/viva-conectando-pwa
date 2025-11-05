@@ -4,6 +4,7 @@ import { useState } from 'react';
 import HomeScreen from './screens/HomeScreen';
 import PinturaScreen from './screens/PinturaScreen';
 import MemoriaScreen from './screens/MemoriaScreen';
+import CacaPalavrasScreen from './screens/CacaPalavrasScreen';
 
 function App() {
   const [telaAtual, setTelaAtual] = useState('home');
@@ -28,15 +29,7 @@ function App() {
         return <MemoriaScreen onVoltar={voltarHome} />;
       
       case 'caca-palavras':
-        return (
-          <div style={{ padding: 20, textAlign: 'center' }}>
-            <h1>🔍 Caça-Palavras</h1>
-            <p>Em breve...</p>
-            <button onClick={voltarHome} style={{ padding: 20, fontSize: 18 }}>
-              Voltar
-            </button>
-          </div>
-        );
+        return <CacaPalavrasScreen onVoltar={voltarHome} />;
       
       default:
         return <HomeScreen onNavigate={navegar} />;

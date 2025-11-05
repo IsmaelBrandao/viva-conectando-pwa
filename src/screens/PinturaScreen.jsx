@@ -1,4 +1,4 @@
-// src/screens/PinturaScreen.jsx - VERSÃO CORRIGIDA
+// src/screens/PinturaScreen.jsx - VERSÃO COMPLETA COM NOVOS DESENHOS
 
 import React, { useRef, useEffect, useState } from 'react';
 import { COLORS, SIZES } from '../styles/colors';
@@ -150,7 +150,7 @@ export default function PinturaScreen({ onVoltar }) {
     );
   }
 
-  // RENDERIZAR SELEÇÃO DE DESENHO
+  // RENDERIZAR SELEÇÃO DE DESENHO (ATUALIZADO COM NOVOS DESENHOS)
   if (modo === 'colorir' && !desenhoEscolhido) {
     return (
       <div style={styles.container}>
@@ -162,30 +162,28 @@ export default function PinturaScreen({ onVoltar }) {
         <main style={styles.main}>
           <button
             style={{ ...styles.botaoModo, backgroundColor: COLORS.success }}
-            onClick={() => setDesenhoEscolhido('flor')}
+            onClick={() => setDesenhoEscolhido('borboleta')}
           >
-            <span style={styles.iconeModo}>🌸</span>
-            <span style={styles.textoModo}>FLOR</span>
+            <span style={styles.iconeModo}>🦋</span>
+            <span style={styles.textoModo}>BORBOLETA</span>
+          </button>
+
+          <button
+            style={{ ...styles.botaoModo, backgroundColor: COLORS.primary }}
+            onClick={() => setDesenhoEscolhido('peixe')}
+          >
+            <span style={styles.iconeModo}>🐠</span>
+            <span style={styles.textoModo}>PEIXE</span>
           </button>
 
           <button
             style={{ ...styles.botaoModo, backgroundColor: COLORS.warning }}
-            onClick={() => setDesenhoEscolhido('casa')}
+            onClick={() => setDesenhoEscolhido('arvore')}
           >
-            <span style={styles.iconeModo}>🏠</span>
-            <span style={styles.textoModo}>CASA</span>
+            <span style={styles.iconeModo}>🌳</span>
+            <span style={styles.textoModo}>ÁRVORE</span>
           </button>
 
-          {/* ✅ TROCADO: Sol → Coração */}
-          <button
-            style={{ ...styles.botaoModo, backgroundColor: COLORS.secondary }}
-            onClick={() => setDesenhoEscolhido('coracao')}
-          >
-            <span style={styles.iconeModo}>💖</span>
-            <span style={styles.textoModo}>CORAÇÃO</span>
-          </button>
-
-          {/* ✅ BOTÃO VOLTAR PADRONIZADO */}
           <button
             style={{
               ...styles.botaoModo,
