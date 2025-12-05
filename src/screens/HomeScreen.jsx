@@ -29,7 +29,7 @@ export default function HomeScreen({ onNavigate }) {
     <div style={styles.container}>
       {/* Cabeçalho */}
       <header style={styles.header}>
-        <h1 style={styles.titulo}>🎨 Viva Conectando</h1>
+        <h1 style={styles.titulo}>🎨 Viva Conectado</h1>
         <p style={styles.subtitulo}>Escolha uma atividade:</p>
       </header>
 
