@@ -1,8 +1,9 @@
-// src/screens/PinturaScreen.jsx - VERSÃO COMPLETA COM NOVOS DESENHOS
+// src/screens/PinturaScreen.jsx - VERSÃO COMPLETA COM AJUDA
 
 import React, { useRef, useEffect, useState } from 'react';
 import { COLORS, SIZES } from '../styles/colors';
 import DesenhoParaColorir from '../components/DesenhoParaColorir';
+import BotaoAjuda from '../components/BotaoAjuda'; // Já estava importado, ótimo!
 
 export default function PinturaScreen({ onVoltar }) {
   const canvasRef = useRef(null);
@@ -146,11 +147,14 @@ export default function PinturaScreen({ onVoltar }) {
             <span style={styles.textoModo}>VOLTAR AO INÍCIO</span>
           </button>
         </main>
+
+        {/* AJUDA DO MENU */}
+        <BotaoAjuda texto="Escolha 'Desenho Livre' para criar sua própria arte, ou 'Colorir Desenhos' para pintar figuras prontas." />
       </div>
     );
   }
 
-  // RENDERIZAR SELEÇÃO DE DESENHO (ATUALIZADO COM NOVOS DESENHOS)
+  // RENDERIZAR SELEÇÃO DE DESENHO
   if (modo === 'colorir' && !desenhoEscolhido) {
     return (
       <div style={styles.container}>
@@ -195,11 +199,14 @@ export default function PinturaScreen({ onVoltar }) {
             <span style={styles.textoModo}>VOLTAR</span>
           </button>
         </main>
+
+        {/* AJUDA DA SELEÇÃO */}
+        <BotaoAjuda texto="Toque em um dos botões para escolher qual desenho você quer colorir hoje." />
       </div>
     );
   }
 
-  // RENDERIZAR MODO COLORIR
+  // RENDERIZAR MODO COLORIR (JOGO ATIVO)
   if (modo === 'colorir' && desenhoEscolhido) {
     return (
       <div style={styles.container}>
@@ -239,6 +246,9 @@ export default function PinturaScreen({ onVoltar }) {
             </div>
           </div>
         </main>
+
+        {/* AJUDA DO MODO COLORIR */}
+        <BotaoAjuda texto="Escolha uma cor nas bolinhas abaixo e depois toque nas partes brancas do desenho para pintar." />
       </div>
     );
   }
@@ -314,6 +324,9 @@ export default function PinturaScreen({ onVoltar }) {
           </button>
         </div>
       </main>
+
+      {/* AJUDA DO MODO LIVRE */}
+      <BotaoAjuda texto="Arraste o dedo na tela branca para desenhar. Use os botões abaixo para mudar a cor ou o tamanho do pincel." />
     </div>
   );
 }

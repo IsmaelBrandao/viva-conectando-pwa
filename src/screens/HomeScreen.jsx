@@ -23,6 +23,12 @@ export default function HomeScreen({ onNavigate }) {
       titulo: 'CAÇA-PALAVRAS',
       cor: COLORS.success,
     },
+    {
+      id: 'bingo-menu', // ID que leva para o menu do bingo
+      icone: '🎱',
+      titulo: 'BINGO ONLINE',
+      cor: '#6A1B9A', // Roxo
+    },
   ];
 
   return (

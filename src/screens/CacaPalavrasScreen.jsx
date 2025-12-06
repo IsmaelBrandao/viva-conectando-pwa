@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { COLORS, SIZES } from '../styles/colors';
+import BotaoAjuda from '../components/BotaoAjuda'; // Importado
 
 export default function CacaPalavrasScreen({ onVoltar }) {
   const [nivel, setNivel] = useState(null);
@@ -194,7 +195,7 @@ export default function CacaPalavrasScreen({ onVoltar }) {
     }
   }, [palavrasEncontradas, palavras]);
 
-  // MENU DE SELEÇÃO
+  // MENU DE SELEÇÃO DE NÍVEL
   if (!nivel) {
     return (
       <div style={styles.container}>
@@ -232,16 +233,16 @@ export default function CacaPalavrasScreen({ onVoltar }) {
           </button>
 
           <button
-            style={{
-              ...styles.botaoNivel,
-              backgroundColor: COLORS.textSecondary,
-            }}
+            style={{ ...styles.botaoNivel, backgroundColor: COLORS.textSecondary }}
             onClick={onVoltar}
           >
             <span style={styles.iconeNivel}>⬅️</span>
             <span style={styles.textoNivel}>VOLTAR AO INÍCIO</span>
           </button>
         </main>
+
+        {/* AJUDA ADICIONADA AQUI - TELA DE NÍVEL */}
+        <BotaoAjuda texto="Escolha a dificuldade do jogo. Fácil tem menos palavras, difícil tem mais." />
       </div>
     );
   }
@@ -270,16 +271,16 @@ export default function CacaPalavrasScreen({ onVoltar }) {
           ))}
 
           <button
-            style={{
-              ...styles.botaoNivel,
-              backgroundColor: COLORS.textSecondary,
-            }}
+            style={{ ...styles.botaoNivel, backgroundColor: COLORS.textSecondary }}
             onClick={() => setNivel(null)}
           >
             <span style={styles.iconeNivel}>⬅️</span>
             <span style={styles.textoNivel}>VOLTAR</span>
           </button>
         </main>
+
+        {/* AJUDA ADICIONADA AQUI - TELA DE TEMA */}
+        <BotaoAjuda texto="Agora escolha um tema para as palavras que você vai procurar." />
       </div>
     );
   }
@@ -395,6 +396,9 @@ export default function CacaPalavrasScreen({ onVoltar }) {
           </button>
         </div>
       </main>
+
+      {/* AJUDA ADICIONADA AQUI - JOGO ATIVO */}
+      <BotaoAjuda texto="Encontre as palavras da lista! Toque na primeira letra da palavra e depois toque na última letra para marcar." />
     </div>
   );
 }

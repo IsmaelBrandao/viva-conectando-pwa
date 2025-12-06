@@ -1,9 +1,10 @@
-// src/screens/MemoriaScreen.jsx - VERSÃO COMPLETA COM EMOJIS MAIORES
-
+// src/screens/MemoriaScreen.jsx
 import React, { useState, useEffect } from 'react';
 import { COLORS, SIZES } from '../styles/colors';
+import BotaoAjuda from '../components/BotaoAjuda'; // <--- IMPORTANTE
 
 export default function MemoriaScreen({ onVoltar }) {
+  // ... (mantenha todo o código existente de estado e lógica) ...
   const [nivel, setNivel] = useState(null);
   const [cartas, setCartas] = useState([]);
   const [cartasViradas, setCartasViradas] = useState([]);
@@ -143,6 +144,9 @@ export default function MemoriaScreen({ onVoltar }) {
             <span style={styles.textoNivel}>VOLTAR AO INÍCIO</span>
           </button>
         </main>
+        
+        {/* AJUDA NO MENU */}
+        <BotaoAjuda texto="Escolha um nível de dificuldade para começar. O fácil tem poucas cartas, o difícil tem muitas." />
       </div>
     );
   }
@@ -161,7 +165,7 @@ export default function MemoriaScreen({ onVoltar }) {
 
       <main style={styles.mainJogo}>
         <div style={styles.containerCentralizado}>
-          {/* GRID DE CARTAS COM EMOJIS MAIORES E MAIS VISÍVEIS */}
+          {/* GRID DE CARTAS */}
           <div
             style={{
               display: 'grid',
@@ -236,10 +240,14 @@ export default function MemoriaScreen({ onVoltar }) {
           </div>
         </div>
       </main>
+
+      {/* --- AJUDA NO JOGO --- */}
+      <BotaoAjuda texto="Toque em duas cartas para virar. Tente encontrar os pares iguais. Se errar, lembre onde elas estavam!" />
     </div>
   );
 }
 
+// ... (Mantenha os styles iguais) ...
 const styles = {
   container: {
     minHeight: '100vh',
